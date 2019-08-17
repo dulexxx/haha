@@ -47,7 +47,7 @@
                 </router-link> -->
                  <li  v-for="(item,index) in dataa" 
                  :key="index"
-                 @click="hanleToDetail(item.ad_name)"
+                 @click="hanleToDetail(item,ad_name)"
                  >
                     <img :src="item.ad_code">
                  </li>
@@ -103,6 +103,7 @@
 </template>
 <script>
 import {index_button_api,columu_recommend_api,index_slider_api,other_advert_api} from 'api/home'
+import JSONP from "jsonp"
 
 import Swiper from "swiper";
 import _ from 'lodash';
@@ -113,6 +114,7 @@ export default {
   name: "Home",
   data() {
     return {
+      daL:{},
       banners: [],
       dataa:[],
       register:[],
@@ -126,12 +128,32 @@ export default {
   },
 
   methods: {
-     hanleToDetail(){
-
+     hanleToDetail(item,ad_name){
+    
       /*   for(let i =0;i<this.dataa[i].length;i++){
            alert(this.dataa[i].ad_link.split("/")[5])
        } */
-       this.$router.push({name:"detail",params:{}})
+    
+      //  let url=` https://apim.restful.5lux.com.cn/good/brand_detail/?id=1091&cata_id=${0}&jsonpCallback=__jp10`
+        
+      //      JSONP(url,{param:"jsonpCallback"},(err,res)=>{
+      //     console.log(this.dataa[item.sort_order])
+      //     this.daL=res
+        
+
+      // })
+      let link_id = item.ad_link.split("/")[5];
+      console.log(link_id)
+      let url = `/api/good/brand_detail/?id=${link_id}&cata_id=0`
+      axios.get(url)
+      .then((res)=>{
+        console.log(res)
+        this.daL=res
+           this.$router.push({name:"detail",params:{daL:this.daL}})
+      })
+        
+    
+      
       },
     initBanner() {
       new Swiper(".swiper-container", {

@@ -3,7 +3,7 @@
          <div class="detail">
                 <i class="iconfont icon-forward" @click="handle"></i>
             <div>
-				{{ad_name}}1111
+				<!-- {{ad_name}}1111 -->
             </div>
         </div>
         <div class="tab">
@@ -50,6 +50,7 @@
 </template>
 <script>
 import axios from 'axios'
+import { constants } from 'crypto';
 /* import {aa,bb} from "api/home" */
 
 export default {
@@ -69,11 +70,11 @@ export default {
     /* async */
     created(){
        
-       axios.get("https://apim.restful.5lux.com.cn/good/brand_detail/?id=12&cata_id=0")
-       .then((data)=>{
-           this.goodsList = data.data.data.goods_list
-           console.log(data.data.data.goods_list)
-       })
+    //    axios.get("https://apim.restful.5lux.com.cn/good/brand_detail/?id=12&cata_id=0")
+    //    .then((data)=>{
+    //        this.goodsList = data.data.data.goods_list
+    //        console.log(data.data.data.goods_list)
+    //    })
 
     //    axios.get("https://apim.restful.5lux.com.cn/good/brand_detail")
     //    .then((data)=>{
@@ -87,6 +88,12 @@ export default {
          */
         
     },
+    mounted() {
+     
+   
+      this.goodsList = this.$route.params.daL.data.data.goods_list
+         console.log( this.goodsList)
+},
    /*  data(){
         return{
             listb:[]
