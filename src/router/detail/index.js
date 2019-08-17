@@ -4,7 +4,8 @@ export default {
     name:"detail",
     meta:{
         tabBar:false,
-        auth:false
+        auth:false,
+        name: 'dule'
     },
    
 }
